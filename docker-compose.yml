@@ -1,0 +1,26 @@
+version: '2'
+services:
+
+  nginx:
+    container_name: 'nginx'
+    build:
+      context: ./
+      dockerfile: ./docker/nginx.docker
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+#      - ./data/static:/var/www/storage
+    ports:
+      - "8080:80"
+
+  node:
+    container_name: 'node'
+    build:
+      context: ./
+      dockerfile: ./docker/node.docker
+    volumes:
+      - ./:/var/www
+      - ~/.npm:/root/.npm
+    ports:
+      - "35729:35729" # for livereload plugin
+    tty: true
