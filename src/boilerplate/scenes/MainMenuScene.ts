@@ -23,39 +23,39 @@ export class MainMenuScene extends Phaser.Scene {
         );
 
 
-        this.game.instance.sfx = {
+        /*this.game.instance.sfx = {
             mainTheme: this.sound.add("sndMainTheme"),
             combatTheme: this.sound.add("sndGameplayTheme"),
             btnOver: this.sound.add("sndBtnOver"),
             btnDown: this.sound.add("sndBtnDown")
-        };
+        };*/
         //start main theme sound
         // todo вынести аудиоменеджер в отдельный класс
-        // this.game.instance.sfx.mainTheme.play();
-        // this.game.instance.sfx.combatTheme.play();
+        // // this.game.instance.sfx.mainTheme.play();
+        // // this.game.instance.sfx.combatTheme.play();
 
         //button init and animation
         this.btnPlay = this.add.sprite(
             this.cameras.main.width * 0.5,
             this.cameras.main.height * 0.5,
-            "sprBtnPlay"
+            "btnPlay"
         );
         this.btnPlay.setInteractive();
         this.btnPlay.on("pointerover", function() {
-            this.btnPlay.setTexture("sprBtnPlayHover");
-            this.game.instance.sfx.btnOver.play();
+            this.btnPlay.setTexture("btnPlayHover");
+            // this.game.instance.sfx.btnOver.play(); sound
         }, this);
         this.btnPlay.on("pointerout", function() {
-            this.setTexture("sprBtnPlay");
+            this.setTexture("btnPlay");
         });
         this.btnPlay.on("pointerdown", function() {
-            this.btnPlay.setTexture("sprBtnPlayDown");
-            this.game.instance.sfx.btnDown.play();
+            this.btnPlay.setTexture("btnPlayActive");
+            // this.game.instance.sfx.btnDown.play(); sound
         }, this);
         this.btnPlay.on("pointerup", function() {
-            this.btnPlay.setTexture("sprBtnPlay");
-            console.log('start scene: CombatScene');
-            this.scene.start("CombatScene");
+            this.btnPlay.setTexture("btnPlay");
+            // console.log('start scene: CombatScene');
+            // this.scene.start("CombatScene"); next scene
         }, this);
 
         let gameTitle = this.game.config.gameTitle + " v" + this.game.config.gameVersion + " " + this.game.config.gameURL;
