@@ -10,17 +10,7 @@
       {
         "type": "image",
         "key": "btnPlay",
-        "url": "src/boilerplate/assets/ui/play-btn-64-default.png"
-      },
-      {
-        "type": "image",
-        "key": "btnPlayHover",
-        "url": "src/boilerplate/assets/ui/play-btn-64-hover.png"
-      },
-      {
-        "type": "image",
-        "key": "btnPlayActive",
-        "url": "src/boilerplate/assets/ui/play-btn-64-active.png"
+        "url": "src/boilerplate/assets/ui/buttons/start.png"
       }
     ]
   }

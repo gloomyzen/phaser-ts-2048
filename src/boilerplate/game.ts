@@ -7,9 +7,9 @@ const _globalConfig = {
 };
 
 const config: Phaser.Types.Core.GameConfig = {
-  title: "2048",
-  version: "0.0.1",
-  url: "someurl.com",
+  title: "2048 TypeScript",
+  version: "0.1",
+  url: "2048.kraken-soft.cloud",
   width: 390,
   height: 600,
   type: Phaser.AUTO,

@@ -1,3 +1,6 @@
+import {ArrayHelper} from "../helpers/ArrayHelper";
+import {PlayButton} from "../objects/PlayButton";
+
 export class MainMenuScene extends Phaser.Scene {
     private titleBitmapText: Phaser.GameObjects.BitmapText;
     private title: Phaser.GameObjects.Text;
@@ -34,8 +37,43 @@ export class MainMenuScene extends Phaser.Scene {
         // // this.game.instance.sfx.mainTheme.play();
         // // this.game.instance.sfx.combatTheme.play();
 
-        //button init and animation
-        this.btnPlay = this.add.sprite(
+        /*
+         * Play Button Group
+         */
+        //todo вынести группу в класс
+        let playButton = new PlayButton(this.scene);
+        /*let textTypes = ["Text", "BitmapText"];
+        let playButton = this.add.group({
+            active: true,
+            name: "playButton",
+            createCallback: function (object) {
+                object.setName(this.name + object.type);
+                if (ArrayHelper.inArray(object.type, textTypes)) {
+                    let element: Phaser.GameObjects.BitmapText = <Phaser.GameObjects.BitmapText>object;
+                    element.x = element.x - element.width / 2;
+                    element.y = element.y - element.height / 1.5;
+                }
+            }
+        });
+        playButton.addMultiple([
+            this.add.sprite(
+                this.cameras.main.width * 0.5,
+                this.cameras.main.height * 0.5,
+                "btnPlay"
+            ),
+            this.add.bitmapText(
+                this.cameras.main.width * 0.5,
+                this.cameras.main.height * 0.5,
+                "font",
+                "START",
+                30,
+                Phaser.GameObjects.BitmapText.ALIGN_CENTER
+            )
+        ]);*/
+
+
+
+        /*this.btnPlay = this.add.sprite(
             this.cameras.main.width * 0.5,
             this.cameras.main.height * 0.5,
             "btnPlay"
@@ -56,7 +94,7 @@ export class MainMenuScene extends Phaser.Scene {
             this.btnPlay.setTexture("btnPlay");
             // console.log('start scene: CombatScene');
             // this.scene.start("CombatScene"); next scene
-        }, this);
+        }, this);*/
 
         let gameTitle = this.game.config.gameTitle + " v" + this.game.config.gameVersion + " " + this.game.config.gameURL;
         this.title = this.add.text(
@@ -65,7 +103,7 @@ export class MainMenuScene extends Phaser.Scene {
             gameTitle.toUpperCase(),
             {
                 fontFamily: 'monospace',
-                fontSize: 12,
+                fontSize: 10,
                 fontStyle: 'bold',
                 color: '#ffffff',
                 align: 'left'
