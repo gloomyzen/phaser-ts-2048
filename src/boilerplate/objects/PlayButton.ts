@@ -53,39 +53,48 @@ export class PlayButton extends Phaser.GameObjects.Group {
 
     private handleHover(): void {
         //Get first sprite of group
-        let elementId: number|boolean = ArrayHelper.getElement("Sprite", this.playButton.getChildren());
-        if (elementId === false) {
-            return;
-        }
-        this.srtButton = <Phaser.GameObjects.Sprite>this.playButton.getChildren()[<number>elementId];
-
-        //handle events
-        this.srtButton.setInteractive();
+        this.srtButton = <Phaser.GameObjects.Sprite>ArrayHelper.getElementByType("Sprite", this.playButton.getChildren());
 
         let _self = this;
-        this.srtButton.on("pointerover", () => {
-            _self.moveButton(PlayButtonStruct.POINTER_OVER)
-            //todo sfx
-            // this.game.instance.sfx.btnOver.play(); sound
-        }, this);
-        this.srtButton.on("pointerout", function() {
-            _self.moveButton(PlayButtonStruct.POINTER_OUT)
-            //todo sfx
-            // this.game.instance.sfx.btnOver.play(); sound
-        }, this);
-        this.srtButton.on("pointerdown", function() {
-            _self.moveButton(PlayButtonStruct.POINTER_DOWN)
-            //todo sfx
-            // this.game.instance.sfx.btnOver.play(); sound
-        }, this);
-        this.srtButton.on("pointerup", function() {
-            _self.moveButton(PlayButtonStruct.POINTER_UP)
-            //todo sfx
-            // this.game.instance.sfx.btnOver.play(); sound
-        }, this);
+        // this.setDefault();
+
+        this.srtButton.setInteractive()
+            .on("pointerover", (event) => {
+                _self.eventHandler(PlayButtonStruct.POINTER_OVER)
+                //todo sfx
+                // this.game.instance.sfx.btnOver.play(); sound
+            })
+            .on("pointerout", () => {
+                _self.eventHandler(PlayButtonStruct.POINTER_OUT)
+                //todo sfx
+                // this.game.instance.sfx.btnOver.play(); sound
+            })
+            .on("pointerdown", () => {
+                _self.eventHandler(PlayButtonStruct.POINTER_DOWN)
+                //todo sfx
+                // this.game.instance.sfx.btnOver.play(); sound
+            })
+            .on("pointerup", () => {
+                _self.eventHandler(PlayButtonStruct.POINTER_UP)
+                this.scene.scene.start("GameScene");
+                //todo sfx
+                // this.game.instance.sfx.btnOver.play(); sound
+            });
     }
 
-    private moveButton(type: PlayButtonStruct) {
+    /*private setDefault(): void {
+        let group = this.playButton.getChildren();
+        if (typeof group == 'undefined') return;
+        let length = group.length;
+        for (let i = 0; i < length; i++) {
+            if (ArrayHelper.inArray(group[i].type, ["Sprite", "BitmapText", "Text"])) {
+                let item = <Phaser.GameObjects.Sprite>group[i];
+                group[i].setData('positionY', item.y);
+            }
+        }
+    }*/
+
+    private eventHandler(type: PlayButtonStruct) {
         let direction: number = 0;
         switch (type) {
             case PlayButtonStruct.POINTER_OVER: {
@@ -101,6 +110,7 @@ export class PlayButton extends Phaser.GameObjects.Group {
             }
         }
         if (direction) {
+            //todo нужно пересмотреть использование объекта
             let elements: Phaser.GameObjects.GameObject[] = this.playButton.getChildren();
             if (typeof elements == 'undefined' || typeof elements.length == 'undefined') return;
             let length: number = elements.length;
@@ -113,10 +123,7 @@ export class PlayButton extends Phaser.GameObjects.Group {
         }
 
         //Get text type element in group
-        let elementId: number|boolean = ArrayHelper.getElement("BitmapText", this.playButton.getChildren());
-        if (elementId !== false) {
-            let textElement = <Phaser.GameObjects.BitmapText>this.playButton.getChildren()[<number>elementId];
-            textElement.setTint(type == PlayButtonStruct.POINTER_DOWN ? this.activeTextColor : this.defaultTextColor);
-        }
+        let textElement = <Phaser.GameObjects.BitmapText>ArrayHelper.getElementByType("BitmapText", this.playButton.getChildren());
+        textElement.setTint(type == PlayButtonStruct.POINTER_DOWN ? this.activeTextColor : this.defaultTextColor);
     }
 }

@@ -1,6 +1,7 @@
 import "phaser";
 import { BootScene } from "./scenes/BootScene";
 import { MainMenuScene } from "./scenes/MainMenuScene";
+import { GameScene } from "./scenes/GameScene";
 
 const _globalConfig = {
   fallBackBackground: '091622',
@@ -29,7 +30,7 @@ const config: Phaser.Types.Core.GameConfig = {
   width: 390,
   height: 600,
   type: Phaser.AUTO,
-  scene: [BootScene, MainMenuScene],
+  scene: [BootScene, MainMenuScene, GameScene],
   // plugins: {
   //   global: [
   //     { key: 'DebugDrawPlugin', plugin: DebugDrawPlugin, mapping: 'debugDraw' }

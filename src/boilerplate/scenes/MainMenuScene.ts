@@ -1,10 +1,9 @@
-import {ArrayHelper} from "../helpers/ArrayHelper";
 import {PlayButton} from "../objects/PlayButton";
 
 export class MainMenuScene extends Phaser.Scene {
     private titleBitmapText: Phaser.GameObjects.BitmapText;
     private title: Phaser.GameObjects.Text;
-    private btnPlay: Phaser.GameObjects.Sprite;
+    // private btnPlay: Phaser.GameObjects.Sprite;
 
     constructor() {
         super({
@@ -73,7 +72,7 @@ export class MainMenuScene extends Phaser.Scene {
             gameTitle.toUpperCase(),
             {
                 fontFamily: 'monospace',
-                fontSize: 10,
+                fontSize: 22,
                 fontStyle: 'bold',
                 color: '#ffffff',
                 align: 'left'

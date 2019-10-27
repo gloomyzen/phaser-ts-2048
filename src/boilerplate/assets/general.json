@@ -11,6 +11,30 @@
         "type": "image",
         "key": "btnPlay",
         "url": "src/boilerplate/assets/ui/buttons/start.png"
+      },
+      {
+        "type": "image",
+        "key": "emptyTile",
+        "url": "src/boilerplate/assets/images/emptytile.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "tiles",
+        "url": "src/boilerplate/assets/images/tiles.png",
+        "frameConfig": {
+          "frameWidth": 200,
+          "frameHeight": 200
+        }
+      },
+      {
+        "type": "audio",
+        "key": "move",
+        "url": "src/boilerplate/assets/sounds/move.ogg"
+      },
+      {
+        "type": "audio",
+        "key": "grow",
+        "url": "src/boilerplate/assets/sounds/grow.ogg"
       }
     ]
   }
