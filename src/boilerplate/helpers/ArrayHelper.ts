@@ -21,12 +21,12 @@ export class ArrayHelper {
         return true;
     }
 
-    public static getElement(needle:string, haystack: Phaser.GameObjects.GameObject[]) {
-        if (typeof haystack == 'undefined') return -1;
+    public static getElement(needle:string, haystack: Phaser.GameObjects.GameObject[]): number|boolean {
+        if (typeof haystack == 'undefined') return false;
         let length: number = haystack.length;
         for(let i: number = 0; i < length; i++) {
             if(haystack[i].type == needle) return i;
         }
-        return -1;
+        return false;
     }
 }

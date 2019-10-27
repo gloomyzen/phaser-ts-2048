@@ -42,36 +42,6 @@ export class MainMenuScene extends Phaser.Scene {
          */
         //todo вынести группу в класс
         let playButton = new PlayButton(this.scene);
-        /*let textTypes = ["Text", "BitmapText"];
-        let playButton = this.add.group({
-            active: true,
-            name: "playButton",
-            createCallback: function (object) {
-                object.setName(this.name + object.type);
-                if (ArrayHelper.inArray(object.type, textTypes)) {
-                    let element: Phaser.GameObjects.BitmapText = <Phaser.GameObjects.BitmapText>object;
-                    element.x = element.x - element.width / 2;
-                    element.y = element.y - element.height / 1.5;
-                }
-            }
-        });
-        playButton.addMultiple([
-            this.add.sprite(
-                this.cameras.main.width * 0.5,
-                this.cameras.main.height * 0.5,
-                "btnPlay"
-            ),
-            this.add.bitmapText(
-                this.cameras.main.width * 0.5,
-                this.cameras.main.height * 0.5,
-                "font",
-                "START",
-                30,
-                Phaser.GameObjects.BitmapText.ALIGN_CENTER
-            )
-        ]);*/
-
-
 
         /*this.btnPlay = this.add.sprite(
             this.cameras.main.width * 0.5,
@@ -96,7 +66,7 @@ export class MainMenuScene extends Phaser.Scene {
             // this.scene.start("CombatScene"); next scene
         }, this);*/
 
-        let gameTitle = this.game.config.gameTitle + " v" + this.game.config.gameVersion + " " + this.game.config.gameURL;
+        let gameTitle = this.game.config.gameTitle + " | v" + this.game.config.gameVersion + " | " + this.game.config.gameURL;
         this.title = this.add.text(
             5,
             5,
