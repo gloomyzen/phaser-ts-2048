@@ -49,7 +49,7 @@ export class GameScene extends Phaser.Scene {
         var textXY = this.getTilePosition(-0.92, -0.4);
         this.scoreText = this.add.bitmapText(textXY.x, textXY.y, "font", "0");
         textXY = this.getTilePosition(-0.92, 1.1);
-        this.bestScore = localStorage.getItem(this.gameOptions.localStorageName);
+        this.bestScore = null;//localStorage.getItem(this.gameOptions.localStorageName);
         if(this.bestScore == null){
             this.bestScore = 0;
         }
@@ -207,7 +207,7 @@ export class GameScene extends Phaser.Scene {
         this.scoreText.text = this.score.toString();
         if(this.score > this.bestScore){
             this.bestScore = this.score;
-            localStorage.setItem(this.gameOptions.localStorageName, this.bestScore);
+            // localStorage.setItem(this.gameOptions.localStorageName, this.bestScore);
             this.bestScoreText.text = this.bestScore.toString();
         }
         for(let i = 0; i < this.game2048.getRows(); i++){
