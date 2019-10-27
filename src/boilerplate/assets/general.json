@@ -35,6 +35,26 @@
         "type": "audio",
         "key": "grow",
         "url": "src/boilerplate/assets/sounds/grow.ogg"
+      },
+      {
+        "type": "image",
+        "key": "fullscreen",
+        "url": "src/boilerplate/assets/ui/fullscreen.png"
+      },
+      {
+        "type": "image",
+        "key": "restart",
+        "url": "src/boilerplate/assets/ui/restart.png"
+      },
+      {
+        "type": "image",
+        "key": "scorepanel",
+        "url": "src/boilerplate/assets/ui/scorepanel.png"
+      },
+      {
+        "type": "image",
+        "key": "scorelabels",
+        "url": "src/boilerplate/assets/ui/scorelabels.png"
       }
     ]
   }

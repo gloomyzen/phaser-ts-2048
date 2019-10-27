@@ -6,6 +6,11 @@ export class GameScene extends Phaser.Scene {
     protected gameOptions;
     protected canMove: boolean;
     protected movingTiles;
+    protected moveSound;
+    protected growSound;
+    protected scoreText;
+    protected bestScore;
+    protected bestScoreText;
 
     constructor() {
         super({
@@ -21,34 +26,34 @@ export class GameScene extends Phaser.Scene {
             maxValue: 12
         });
         this.score = 0;
-        // let restartXY = this.getTilePosition(-0.8, this.gameOptions.boardSize.cols - 1);
-        // let restartButton = this.add.sprite(restartXY.x, restartXY.y, "restart");
-        // restartButton.setInteractive();
-        // restartButton.on("pointerdown", function(){
-        //     this.scene.start("PlayGame");
-        // }, this);
-        // let fullScreenButton = this.add.sprite(restartButton.x, restartButton.y - 120, "fullscreen");
-        // fullScreenButton.setInteractive();
-        // fullScreenButton.on("pointerup", function(){
-        //     if(!this.scale.isFullscreen){
-        //         this.scale.startFullscreen();
-        //     }
-        //     else{
-        //         this.scale.stopFullscreen();
-        //     }
-        // }, this);
-        // //
-        // var scoreXY = this.getTilePosition(-0.8, 1);
-        // this.add.image(scoreXY.x, scoreXY.y, "scorepanel");
-        // this.add.image(scoreXY.x, scoreXY.y - 70, "scorelabels");
-        // var textXY = this.getTilePosition(-0.92, -0.4);
-        // this.scoreText = this.add.bitmapText(textXY.x, textXY.y, "font", "0");
-        // textXY = this.getTilePosition(-0.92, 1.1);
-        // this.bestScore = localStorage.getItem(this.gameOptions.localStorageName);
-        // if(this.bestScore == null){
-        //     this.bestScore = 0;
-        // }
-        // this.bestScoreText = this.add.bitmapText(textXY.x, textXY.y, "font", this.bestScore.toString());
+        let restartXY = this.getTilePosition(-0.8, this.gameOptions.boardSize.cols - 1);
+        let restartButton = this.add.sprite(restartXY.x, restartXY.y, "restart");
+        restartButton.setInteractive();
+        restartButton.on("pointerdown", function(){
+            this.scene.start("GameScene");
+        }, this);
+        let fullScreenButton = this.add.sprite(restartButton.x, restartButton.y - 120, "fullscreen");
+        fullScreenButton.setInteractive();
+        fullScreenButton.on("pointerup", function(){
+            if(!this.scale.isFullscreen){
+                this.scale.startFullscreen();
+            }
+            else{
+                this.scale.stopFullscreen();
+            }
+        }, this);
+
+        var scoreXY = this.getTilePosition(-0.8, 1);
+        this.add.image(scoreXY.x, scoreXY.y, "scorepanel");
+        this.add.image(scoreXY.x, scoreXY.y - 70, "scorelabels");
+        var textXY = this.getTilePosition(-0.92, -0.4);
+        this.scoreText = this.add.bitmapText(textXY.x, textXY.y, "font", "0");
+        textXY = this.getTilePosition(-0.92, 1.1);
+        this.bestScore = localStorage.getItem(this.gameOptions.localStorageName);
+        if(this.bestScore == null){
+            this.bestScore = 0;
+        }
+        this.bestScoreText = this.add.bitmapText(textXY.x, textXY.y, "font", this.bestScore.toString());
 
 
         this.canMove = false;
@@ -66,8 +71,8 @@ export class GameScene extends Phaser.Scene {
         this.addTile();
         this.input.keyboard.on("keydown", this.handleKey, this);
         this.input.on("pointerup", this.handleSwipe, this);
-        // this.moveSound = this.sound.add("move");
-        // this.growSound = this.sound.add("grow");
+        this.moveSound = this.sound.add("move");
+        this.growSound = this.sound.add("grow");
     }
     addTile(){
         let addedTile = this.game2048.addTile();
@@ -118,11 +123,11 @@ export class GameScene extends Phaser.Scene {
     }
     handleSwipe(e){
         if(this.canMove){
-            var swipeTime = e.upTime - e.downTime;
-            var fastEnough = swipeTime < this.gameOptions.swipeMaxTime;
-            var swipe = new Phaser.Geom.Point(e.upX - e.downX, e.upY - e.downY);
-            var swipeMagnitude = Phaser.Geom.Point.GetMagnitude(swipe);
-            var longEnough = swipeMagnitude > this.gameOptions.swipeMinDistance;
+            let swipeTime = e.upTime - e.downTime;
+            let fastEnough = swipeTime < this.gameOptions.swipeMaxTime;
+            let swipe = new Phaser.Geom.Point(e.upX - e.downX, e.upY - e.downY);
+            let swipeMagnitude = Phaser.Geom.Point.GetMagnitude(swipe);
+            let longEnough = swipeMagnitude > this.gameOptions.swipeMinDistance;
             if(longEnough && fastEnough){
                 Phaser.Geom.Point.SetMagnitude(swipe, 1);
                 if(swipe.x > this.gameOptions.swipeMinNormal){
@@ -145,7 +150,7 @@ export class GameScene extends Phaser.Scene {
         if(movements.length > 0){
             this.canMove = false;
             this.movingTiles = 0;
-            // this.moveSound.play();
+            this.moveSound.play();
             movements.forEach(function(movement){
                 var newPos = this.getTilePosition(movement.to.row, movement.to.column);
                 this.moveTile(this.game2048.getCustomData(movement.from.row, movement.from.column), newPos, movement.from.value != movement.to.value);
@@ -176,7 +181,7 @@ export class GameScene extends Phaser.Scene {
         })
     }
     upgradeTile(tile){
-        // this.growSound.play();
+        this.growSound.play();
         tile.setFrame(tile.frame.name + 1);
         this.tweens.add({
             targets: [tile],
@@ -199,18 +204,18 @@ export class GameScene extends Phaser.Scene {
         }
     }
     refreshBoard(){
-        // this.scoreText.text = this.score.toString();
-        // if(this.score > this.bestScore){
-        //     this.bestScore = this.score;
-        //     localStorage.setItem(gameOptions.localStorageName, this.bestScore);
-        //     this.bestScoreText.text = this.bestScore.toString();
-        // }
-        for(var i = 0; i < this.game2048.getRows(); i++){
-            for(var j = 0; j < this.game2048.getColumns(); j++){
-                var spritePosition = this.getTilePosition(i, j);
+        this.scoreText.text = this.score.toString();
+        if(this.score > this.bestScore){
+            this.bestScore = this.score;
+            localStorage.setItem(this.gameOptions.localStorageName, this.bestScore);
+            this.bestScoreText.text = this.bestScore.toString();
+        }
+        for(let i = 0; i < this.game2048.getRows(); i++){
+            for(let j = 0; j < this.game2048.getColumns(); j++){
+                let spritePosition = this.getTilePosition(i, j);
                 this.game2048.getCustomData(i, j).x = spritePosition.x;
                 this.game2048.getCustomData(i, j).y = spritePosition.y;
-                var tileValue = this.game2048.getTileValue(i, j);
+                let tileValue = this.game2048.getTileValue(i, j);
                 if(tileValue > 0){
                     this.game2048.getCustomData(i, j).visible = true;
                     this.game2048.getCustomData(i, j).setFrame(tileValue - 1);
