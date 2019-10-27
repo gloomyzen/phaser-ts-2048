@@ -71,8 +71,8 @@ export class GameScene extends Phaser.Scene {
         this.addTile();
         this.input.keyboard.on("keydown", this.handleKey, this);
         this.input.on("pointerup", this.handleSwipe, this);
-        this.moveSound = this.sound.add("move");
-        this.growSound = this.sound.add("grow");
+        // this.moveSound = this.sound.add("move");
+        // this.growSound = this.sound.add("grow");
     }
     addTile(){
         let addedTile = this.game2048.addTile();
@@ -150,7 +150,7 @@ export class GameScene extends Phaser.Scene {
         if(movements.length > 0){
             this.canMove = false;
             this.movingTiles = 0;
-            this.moveSound.play();
+            // this.moveSound.play();
             movements.forEach(function(movement){
                 var newPos = this.getTilePosition(movement.to.row, movement.to.column);
                 this.moveTile(this.game2048.getCustomData(movement.from.row, movement.from.column), newPos, movement.from.value != movement.to.value);
@@ -181,7 +181,7 @@ export class GameScene extends Phaser.Scene {
         })
     }
     upgradeTile(tile){
-        this.growSound.play();
+        // this.growSound.play();
         tile.setFrame(tile.frame.name + 1);
         this.tweens.add({
             targets: [tile],
