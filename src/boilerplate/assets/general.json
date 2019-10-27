@@ -38,11 +38,6 @@
       },
       {
         "type": "image",
-        "key": "fullscreen",
-        "url": "src/boilerplate/assets/ui/fullscreen.png"
-      },
-      {
-        "type": "image",
         "key": "restart",
         "url": "src/boilerplate/assets/ui/restart.png"
       },

@@ -32,16 +32,6 @@ export class GameScene extends Phaser.Scene {
         restartButton.on("pointerdown", function(){
             this.scene.start("GameScene");
         }, this);
-        let fullScreenButton = this.add.sprite(restartButton.x, restartButton.y - 120, "fullscreen");
-        fullScreenButton.setInteractive();
-        fullScreenButton.on("pointerup", function(){
-            if(!this.scale.isFullscreen){
-                this.scale.startFullscreen();
-            }
-            else{
-                this.scale.stopFullscreen();
-            }
-        }, this);
 
         var scoreXY = this.getTilePosition(-0.8, 1);
         this.add.image(scoreXY.x, scoreXY.y, "scorepanel");
