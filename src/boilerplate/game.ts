@@ -26,17 +26,22 @@ const config: Phaser.Types.Core.GameConfig = {
   title: "2048 TypeScript",
   version: "0.1 dev",
   url: "2048.kraken-soft.cloud",
-  width: /*390*/width,
-  height: /*600*/width * _globalConfig.aspectRatio,
+  width: 390,
+  height: 600,
   type: Phaser.AUTO,
-  // type: Phaser.Scale.FIT,
-  parent: "game",
   scene: [BootScene, MainMenuScene],
   // plugins: {
   //   global: [
   //     { key: 'DebugDrawPlugin', plugin: DebugDrawPlugin, mapping: 'debugDraw' }
   //   ]
   // },
+  scale: {
+    parent: "game",
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: width,
+    height: width * _globalConfig.aspectRatio
+  },
   input: {
     keyboard: true,
     mouse: true,
