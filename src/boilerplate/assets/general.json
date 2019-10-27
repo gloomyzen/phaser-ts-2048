@@ -29,12 +29,12 @@
       {
         "type": "audio",
         "key": "move",
-        "url": "src/boilerplate/assets/sounds/move.ogg"
+        "url": ["src/boilerplate/assets/sounds/move.ogg", "src/boilerplate/assets/sounds/move.mp3"]
       },
       {
         "type": "audio",
         "key": "grow",
-        "url": "src/boilerplate/assets/sounds/grow.ogg"
+        "url": ["src/boilerplate/assets/sounds/grow.ogg", "src/boilerplate/assets/sounds/grow.mp3"]
       },
       {
         "type": "image",
