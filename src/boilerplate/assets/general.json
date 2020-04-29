@@ -1,0 +1,56 @@
+{
+  "preload": {
+    "files": [
+      {
+        "type": "bitmapFont",
+        "key": "font",
+        "textureURL": "src/boilerplate/assets/font/font.png",
+        "fontDataURL": "src/boilerplate/assets/font/font.fnt"
+      },
+      {
+        "type": "image",
+        "key": "btnPlay",
+        "url": "src/boilerplate/assets/ui/buttons/start.png"
+      },
+      {
+        "type": "image",
+        "key": "emptyTile",
+        "url": "src/boilerplate/assets/images/emptytile.png"
+      },
+      {
+        "type": "spritesheet",
+        "key": "tiles",
+        "url": "src/boilerplate/assets/images/tiles.png",
+        "frameConfig": {
+          "frameWidth": 200,
+          "frameHeight": 200
+        }
+      },
+      {
+        "type": "audio",
+        "key": "move",
+        "url": ["src/boilerplate/assets/sounds/move.ogg", "src/boilerplate/assets/sounds/move.mp3"]
+      },
+      {
+        "type": "audio",
+        "key": "grow",
+        "url": ["src/boilerplate/assets/sounds/grow.ogg", "src/boilerplate/assets/sounds/grow.mp3"]
+      },
+      {
+        "type": "image",
+        "key": "restart",
+        "url": "src/boilerplate/assets/ui/restart.png"
+      },
+      {
+        "type": "image",
+        "key": "scorepanel",
+        "url": "src/boilerplate/assets/ui/scorepanel.png"
+      },
+      {
+        "type": "image",
+        "key": "scorelabels",
+        "url": "src/boilerplate/assets/ui/scorelabels.png"
+      }
+    ]
+  }
+}
