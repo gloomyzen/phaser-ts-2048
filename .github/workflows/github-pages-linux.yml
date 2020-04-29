@@ -1,0 +1,70 @@
+name: Github Pages build
+
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+      - 'docker/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+      - 'docker/**'
+
+jobs:
+
+  build:
+
+    name: Ubuntu 18.04
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Get repository name.
+        run: echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY##*/}
+
+      - name: Apt install.
+        shell: bash
+        run: |
+          sudo apt-get update -y
+          sudo apt-get dist-upgrade -y
+          sudo apt-get install -y --fix-missing git zip curl wget python build-essential \
+          && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash \
+          && export NVM_DIR="$HOME/.nvm" \
+          && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+          && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
+          && nvm install 13.11.0 && nvm use 13.11.0
+
+      - name: Clone. 🛎️
+        uses: actions/checkout@v1
+        with:
+          submodules: recursive
+          path: ${{ env.REPO_NAME }}
+
+      - name: First set up.
+        shell: bash
+        run: |
+          npm -v > CACHE_KEY.txt
+          echo $MANUAL_CACHING >> CACHE_KEY.txt
+          if [ "$AUTO_CACHING" == "1" ]; then
+            thisFile=$REPO_NAME/.github/workflows/linux.yml
+            echo `md5sum $thisFile | cut -c -32` >> CACHE_KEY.txt
+          fi
+          md5cache=$(md5sum CACHE_KEY.txt | cut -c -32)
+          echo ::set-env name=CACHE_KEY::$md5cache
+
+      - name: Build. 🔧
+        shell: bash
+        run: |
+          npm run build && mkdir build \
+          && cp index.html build && cp -R dist build/dist
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
