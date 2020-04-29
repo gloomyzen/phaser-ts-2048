@@ -29,9 +29,7 @@ jobs:
       - name: Apt install.
         shell: bash
         run: |
-          sudo apt-get update -y
-          sudo apt-get dist-upgrade -y
-          sudo apt-get install -y --fix-missing git zip curl wget python build-essential \
+          sudo apt-get install -y git curl build-essential \
           && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash \
           && export NVM_DIR="$HOME/.nvm" \
           && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
