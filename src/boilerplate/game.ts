@@ -26,20 +26,15 @@ width += _globalConfig.tileSpacing;
 const config: Phaser.Types.Core.GameConfig = {
   title: "2048 TypeScript",
   version: "0.1 dev",
-  url: "2048.kraken-soft.cloud",
+  url: "gloomyzen.github.io/phaser-ts-2048",
   width: 390,
   height: 600,
   type: Phaser.AUTO,
   scene: [BootScene, MainMenuScene, GameScene],
-  // plugins: {
-  //   global: [
-  //     { key: 'DebugDrawPlugin', plugin: DebugDrawPlugin, mapping: 'debugDraw' }
-  //   ]
-  // },
   scale: {
     parent: "game",
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
+    // mode: Phaser.Scale.ScaleModes.FIT,
+    // autoCenter: Phaser.Scale.CENTER_BOTH,
     width: width,
     height: width * _globalConfig.aspectRatio
   },
