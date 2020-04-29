@@ -59,7 +59,7 @@ jobs:
       - name: Build. 🔧
         shell: bash
         run: |
-          npm run build && mkdir build \
+          npm i && npm run build && mkdir build \
           && cp index.html build && cp -R dist build/dist
 
       - name: Deploy 🚀
