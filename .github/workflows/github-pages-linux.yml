@@ -58,7 +58,7 @@ jobs:
         shell: bash
         run: |
           npm i && npm run build && mkdir build \
-          && cp index.html build && cp -R dist build/dist
+          && cp index.html build && cp -R dist build/dist && cp -R src build/src && cp -R styles build/styles
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
